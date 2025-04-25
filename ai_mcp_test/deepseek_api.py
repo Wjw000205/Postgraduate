@@ -77,12 +77,3 @@ if response:
     print(f"AI:{function_output}\n")
 else:
     print(f"AI{response.choices[0].message.content}\n")
-# message = send_messages(messages)
-# print(f"User>\t {messages[0]['content']}")
-#
-# tool = message.tool_calls[0]
-# messages.append(message)
-#
-# messages.append({"role": "tool", "tool_call_id": tool.id, "content": "Linear regression completed. θ0: 0, θ1: 2."})
-# message = send_messages(messages)
-# print(f"Model>\t {message.content}")
