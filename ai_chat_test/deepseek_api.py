@@ -1,6 +1,5 @@
 import json
-from traceback import print_tb
-
+from add import add
 from openai import OpenAI
 from linear_regression import linear_regression
 
@@ -13,7 +12,7 @@ tools = [
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "X": {
+                    "x": {
                         "type": "array",
                         "items": {"type": "number"},
                         "description": "The x-axis parameter list",
@@ -28,10 +27,28 @@ tools = [
             },
         }
     },
+    {
+        "type": "function",
+        "function": {
+            "name": "add",
+            "description": "Add two numbers.",
+            "parameters": {
+                "type": "object",
+                "x":{
+                    "type": "number",
+                    "description": "The first number to be added.",
+                },
+                "y":{
+                    "type": "number",
+                    "description": "The second number to be added.", }
+            },
+            "required": ["X","y"]
+        }
+    }
 ]
 
 client = OpenAI(
-    api_key="my_api_key",
+    api_key="sk-2dcfc2d0f552462d89d044d55e61e787",
     base_url="https://api.deepseek.com",
 )
 
@@ -50,20 +67,25 @@ def use_tools(json_data):
     function_name = json.loads(json_data)["choices"][0]["message"]["tool_calls"][0]["function"]["name"]
     arguments = json.loads(json_data)["choices"][0]["message"]["tool_calls"][0]["function"]["arguments"]
 
-    function_mapper = {
-        "linear_regression": linear_regression
-    }
-    #
+    if function_name == "linear_regression":
+        function_mapper = {
+            "linear_regression": linear_regression
+        }
+
+    elif function_name == "add":
+        function_mapper = {
+            "add": add
+        }
     function = function_mapper.get(function_name)
     if arguments == {}:
         function_output = "No arguments provided."
         print("No arguments")
     else:
-        function_output = function(json.loads(arguments)["X"], json.loads(arguments)["y"])
+        function_output = function(json.loads(arguments)["x"], json.loads(arguments)["y"])
         print(f"AI:{function_output}\n")
         messages = [
             {"role": "user",
-            "content": "Please summarize the process of my tool usage." + str(function_output)},
+                "content": "Please summarize the process of my tool usage." + str(function_output)},
             {"role": "system", "content": ""}
         ]
         answer = send_messages(messages, tools)
@@ -76,7 +98,7 @@ def main_loop():
     while True:
         try:
             #获取用户输入
-            user_input = input("用户输入(输入exit离开):")
+            user_input = input("user input:(input 'exit' to quit):")
 
             if user_input == "exit":
                 break
@@ -102,9 +124,9 @@ def main_loop():
             else:
                 print(f"AI{response.choices[0].message.content}")
         except KeyboardInterrupt:
-            print("\n再见！")
+            print("\nGoodbye!")
             break
         except Exception as e:
-            print(f"发生错误: {str(e)}")
+            print(f"Error: {str(e)}")
 if __name__ == "__main__":
     main_loop()
