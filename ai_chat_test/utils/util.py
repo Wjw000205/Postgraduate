@@ -7,7 +7,7 @@ from ai_chat_test.functions.linear_regression import linear_regression
 from ai_chat_test.utils.tools import tools
 
 client = OpenAI(
-    api_key="sk-9ce66a09f7cf429c8ed0bb2ac762a36a",
+    api_key="my_api_key",
     base_url="https://api.deepseek.com",
 )
 
