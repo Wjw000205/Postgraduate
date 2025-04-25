@@ -37,7 +37,10 @@ def send_messages(messages,tools = None):
     response = client.chat.completions.create(
         model="deepseek-chat",
         messages=messages,
-        tools=tools
+        tools=tools,
+        # response_format={
+        #     'type': 'json_object'
+        # }
     )
     return response
 
@@ -68,7 +71,8 @@ if response:
     # #
     function = function_mapper.get(function_name)
     if arguments == {}:
-        function_output = function()
+        function_output = "No arguments provided."
+        print("No arguments")
     else:
         function_output = function(json.loads(arguments)["X"],json.loads(arguments)["y"])
     print(f"AI:{function_output}\n")
