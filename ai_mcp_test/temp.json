@@ -1,0 +1,36 @@
+{
+  "id": "41284932-549b-460b-95ee-4e05a0867cff",
+  "choices": [
+    {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+        "content": "",
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "call_0_2ff8f355-9303-4e1f-856f-a7f71829b79a",
+            "function": {
+              "arguments": "{\"X\":[1,2,3],\"y\":[2,4,6]}",
+              "name": "linear_regression"},
+            "type": "function", "index": 0}
+        ]
+      }
+    }
+  ],
+  "created": 1745562436,
+  "model": "deepseek-chat",
+  "object": "chat.completion",
+  "system_fingerprint": "fp_8802369eaa_prod0225",
+  "usage": {
+    "completion_tokens": 31,
+    "prompt_tokens": 192,
+    "total_tokens": 223,
+    "prompt_tokens_details": {
+      "cached_tokens": 128
+    },
+    "prompt_cache_hit_tokens": 128,
+    "prompt_cache_miss_tokens": 64
+  }
+}

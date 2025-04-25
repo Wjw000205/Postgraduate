@@ -1,5 +1,7 @@
 import json
+import sys
 
+from lxml.etree import tostring
 from openai import OpenAI
 from linear_regression import linear_regression
 
@@ -30,7 +32,7 @@ tools = [
 ]
 
 client = OpenAI(
-    api_key="sk-03e0772701994468ab87c85964e90af7",
+    api_key="sk-cf46ee3bc9954e0ab809f4aec1800071",
     base_url="https://api.deepseek.com",
 )
 
@@ -50,22 +52,30 @@ messages = [
 response = send_messages(messages,tools)
 if not response:
     print("No response")
+# if response.choices[0].message.tool_calls:
+#     function_name = response.choices[0].message.tool_calls[0].function.name
+#     arguments_string = response.choices[0].message.tool_calls[0].function.arguments
+#     arguments = json.loads(arguments_string)
+elif response:
+    # print(response)
+    json_data = json.dumps(response.to_dict())
+    # print(json_data)
+    function_name =json.loads(json_data)["choices"][0]["message"]["tool_calls"][0]["function"]["name"]
+    arguments = json.loads(json_data)["choices"][0]["message"]["tool_calls"][0]["function"]["arguments"]
 
-if response.choices[0].message.tool_calls:
-    function_name = response.choices[0].message.tool_calls[0].function.name
-    arguments_string = response.choices[0].message.tool_calls[0].function.arguments
-
-    arguments = json.loads(arguments_string)
-
+    # print(function_name)
+    # print(arguments)
+    # arguments = json.loads(arguments_string)
+    #
     function_mapper = {
         "linear_regression": linear_regression
     }
-
+    # #
     function = function_mapper.get(function_name)
     if arguments == {}:
         function_output = function()
     else:
-        function_output = function(arguments.get("X"),arguments.get("y"))
+        function_output = function(json.loads(arguments)["X"],json.loads(arguments)["y"])
     print(f"AI:{function_output}\n")
 else:
     print(f"AI{response.choices[0].message.content}\n")
