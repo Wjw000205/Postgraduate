@@ -32,7 +32,7 @@ tools = [
 ]
 
 client = OpenAI(
-    api_key="sk-cf46ee3bc9954e0ab809f4aec1800071",
+    api_key="my_api_key",
     base_url="https://api.deepseek.com",
 )
 
@@ -56,7 +56,7 @@ if not response:
 #     function_name = response.choices[0].message.tool_calls[0].function.name
 #     arguments_string = response.choices[0].message.tool_calls[0].function.arguments
 #     arguments = json.loads(arguments_string)
-elif response:
+if response:
     # print(response)
     json_data = json.dumps(response.to_dict())
     # print(json_data)
