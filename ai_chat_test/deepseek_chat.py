@@ -38,5 +38,6 @@ def main_loop():
             break
         except Exception as e:
             print(f"Error: {str(e)}")
+
 if __name__ == "__main__":
     main_loop()
