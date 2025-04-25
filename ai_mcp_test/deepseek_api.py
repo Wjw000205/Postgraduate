@@ -36,13 +36,18 @@ client = OpenAI(
     base_url="https://api.deepseek.com",
 )
 
-def send_messages(messages,tools):
+def send_messages(messages,tools = None):
     response = client.chat.completions.create(
         model="deepseek-chat",
         messages=messages,
         tools=tools
     )
     return response
+# def get_answer(message):
+#     response = client.chat.completions.create(
+#         model="deepseek-chat",
+#         messages=message,
+#     )
 
 messages = [
     {"role": "user","content": "Please perform a linear regression with the following data: X=[1,2,3], y=[2,4,6]."},
@@ -75,5 +80,14 @@ if response:
     else:
         function_output = function(json.loads(arguments)["X"],json.loads(arguments)["y"])
     print(f"AI:{function_output}\n")
+    messages = [
+        {"role": "user",
+         "content": "Please summarize the process of my tool usage."+str(function_output)},
+        {"role": "system", "content": ""}
+    ]
+    answer = send_messages(messages)
+    answer_data =json.loads(json.dumps(answer.to_dict()))["choices"][0]["message"]["content"]
+    print(f"AI:{answer_data}\n")
+
 else:
     print(f"AI{response.choices[0].message.content}\n")
