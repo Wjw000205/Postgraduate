@@ -2,53 +2,10 @@ import json
 from add import add
 from openai import OpenAI
 from linear_regression import linear_regression
-
-tools = [
-    {
-        "type": "function",
-        "function": {
-            "name": "linear_regression",
-            "description": "Perform linear regression on the given data.",
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "x": {
-                        "type": "array",
-                        "items": {"type": "number"},
-                        "description": "The x-axis parameter list",
-                    },
-                    "y":{
-                        "type": "array",
-                        "items": {"type": "number"},
-                        "description": "The y-axis parameter list",
-                    }
-                },
-                "required": ["X","y"]
-            },
-        }
-    },
-    {
-        "type": "function",
-        "function": {
-            "name": "add",
-            "description": "Add two numbers.",
-            "parameters": {
-                "type": "object",
-                "x":{
-                    "type": "number",
-                    "description": "The first number to be added.",
-                },
-                "y":{
-                    "type": "number",
-                    "description": "The second number to be added.", }
-            },
-            "required": ["X","y"]
-        }
-    }
-]
+from tools import tools
 
 client = OpenAI(
-    api_key="my_api_key",
+    api_key="sk-d02e930a39e2441a9f345cfdaddae735",
     base_url="https://api.deepseek.com",
 )
 
