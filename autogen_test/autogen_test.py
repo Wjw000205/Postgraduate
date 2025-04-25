@@ -4,7 +4,7 @@ from linear_regression import linear_regression
 config_list = [
     {
         "model": "deepseek-chat",
-        "api_key": "sk-29b409cf751a4f4eacb3787586f723d7",
+        "api_key": "sk-03e0772701994468ab87c85964e90af7",
         "api_type": "deepseek"
     }
 ]
