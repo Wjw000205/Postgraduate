@@ -6,8 +6,8 @@ def main_loop():
     print("Welcome to DeepSeek")
     while True:
         try:
-            #获取用户输入
-            user_input = input("user input:(input 'exit' to quit):")
+            #Get the user input
+            user_input = input("user input(input 'exit' to quit):")
 
             if user_input == "exit":
                 print("Goodbye!")
