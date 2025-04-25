@@ -40,11 +40,6 @@ def send_messages(messages,tools = None):
         tools=tools
     )
     return response
-# def get_answer(message):
-#     response = client.chat.completions.create(
-#         model="deepseek-chat",
-#         messages=message,
-#     )
 
 messages = [
     {"role": "user","content": "Please perform a linear regression with the following data: X=[1,2,3], y=[2,4,6]."},
