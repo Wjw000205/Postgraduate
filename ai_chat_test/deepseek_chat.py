@@ -48,7 +48,7 @@ tools = [
 ]
 
 client = OpenAI(
-    api_key="sk-2dcfc2d0f552462d89d044d55e61e787",
+    api_key="my_api_key",
     base_url="https://api.deepseek.com",
 )
 
