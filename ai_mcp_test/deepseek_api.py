@@ -65,8 +65,6 @@ elif response:
 
     # print(function_name)
     # print(arguments)
-    # arguments = json.loads(arguments_string)
-    #
     function_mapper = {
         "linear_regression": linear_regression
     }
