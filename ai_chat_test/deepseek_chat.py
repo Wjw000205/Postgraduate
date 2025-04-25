@@ -4,6 +4,7 @@ from ai_chat_test.utils.tools import tools
 
 def main_loop():
     print("Welcome to DeepSeek")
+    messages = []
     while True:
         try:
             #Get the user input
@@ -13,11 +14,7 @@ def main_loop():
                 print("Goodbye!")
                 break
 
-            messages = [
-                {"role": "user",
-                 "content": user_input},
-                {"role": "system", "content": ""}
-            ]
+            messages.append({"role": "user","content": user_input})
 
             response = send_messages(messages, tools)
             if not response:
@@ -27,10 +24,13 @@ def main_loop():
                 # print(response)
                 json_data = json.dumps(response.to_dict())
                 if(json.loads(json_data)["choices"][0]["finish_reason"]=="tool_calls"):
-                    use_tools(json_data)
+                    messages.append(use_tools(json_data))
+                    print(messages)
                 else:
                     answer_data = json.loads(json.dumps(response.to_dict()))["choices"][0]["message"]["content"]
+                    messages.append(json.loads(json.dumps(response.to_dict()))["choices"][0]["message"])
                     print(f"AI:{answer_data}")
+                    print(messages)
             else:
                 print(f"AI{response.choices[0].message.content}")
         except KeyboardInterrupt:
