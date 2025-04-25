@@ -1,7 +1,4 @@
 import json
-import sys
-
-from lxml.etree import tostring
 from openai import OpenAI
 from linear_regression import linear_regression
 
