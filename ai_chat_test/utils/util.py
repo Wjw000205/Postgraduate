@@ -2,9 +2,9 @@ import json
 
 from openai import OpenAI
 
-from ai_chat_test.add import add
-from ai_chat_test.linear_regression import linear_regression
-from ai_chat_test.tools import tools
+from ai_chat_test.functions.add import add
+from ai_chat_test.functions.linear_regression import linear_regression
+from ai_chat_test.utils.tools import tools
 
 client = OpenAI(
     api_key="my_api_key",

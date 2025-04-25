@@ -1,6 +1,6 @@
 import json
-from ai_chat_test.util import send_messages, use_tools
-from tools import tools
+from ai_chat_test.utils.util import send_messages, use_tools
+from ai_chat_test.utils.tools import tools
 
 def main_loop():
     print("Welcome to DeepSeek")
