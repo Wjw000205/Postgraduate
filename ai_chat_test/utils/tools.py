@@ -40,5 +40,24 @@ tools = [
             },
             "required": ["x", "y"]
         }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_weather",
+            "description": "Get the weather based on the province and city",
+            "parameters": {
+                "type": "object",
+                "province": {
+                    "type": "string",
+                    "description": "The province"
+                },
+                "city": {
+                    "type": "string",
+                    "description": "The city"
+                },
+            "required": ["province", "city"]
+            }
+        }
     }
 ]
