@@ -98,7 +98,7 @@ def use_tools(json_data):
             function_output = function(json.loads(arguments)["province"],json.loads(arguments)["city"])
             messages = [
                 {"role": "user",
-                 "content": "Get the data base on the json,and give some introduction about it:" + str(function_output)},
+                 "content": "根据下面的json数据，获取对应地区的天气情况，并根据天气给出建议（活动、穿衣等）:" + str(function_output)},
                 {"role": "system", "content": ""}
             ]
 

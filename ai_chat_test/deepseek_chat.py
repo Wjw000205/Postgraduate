@@ -26,12 +26,12 @@ def main_loop():
                 json_data = json.dumps(response.to_dict())
                 if(json.loads(json_data)["choices"][0]["finish_reason"]=="tool_calls"):
                     messages.append(use_tools(json_data))
-                    print(messages)
+                    # print(messages)
                 else:
                     answer_data = json.loads(json.dumps(response.to_dict()))["choices"][0]["message"]["content"]
                     messages.append(json.loads(json.dumps(response.to_dict()))["choices"][0]["message"])
                     print(f"AI:{answer_data}")
-                    print(messages)
+                    # print(messages)
             else:
                 print(f"AI{response.choices[0].message.content}")
         except KeyboardInterrupt:
