@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-
 def linear_regression(X, y):
     """
     线性回归函数，接受X和y作为参数进行拟合。
